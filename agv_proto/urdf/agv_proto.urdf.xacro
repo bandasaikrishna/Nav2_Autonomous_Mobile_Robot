@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<robot name="agv_proto" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <material name="blue">
+	    <color rgba="0 0 0.8 1"/>
+    </material>
+
+    <material name="white">
+	    <color rgba="1 1 1 1"/>
+    </material>
+
+    <material name="black">
+	    <color rgba="0 0 0 1"/>
+    </material>
+
+    <material name="green">
+        <color rgba="0.0 0.8 0.0 1.0"/>
+    </material>
+
+	<link name="base_footprint">
+    
+    </link>
+	
+	<joint name="base_footprint_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="base_footprint" />
+        <child link="base_link" />
+    </joint>
+	
+    <link name="base_link">
+    
+    </link>
+
+    <joint name="base_link_joint" type="fixed">
+        <origin xyz="0 0 0.10" rpy="0 0 0" />
+        <parent link="base_link" />
+        <child link="base_plate" />
+    </joint>
+
+    <link name="base_plate">
+    <visual>
+      <origin rpy="0 0 0" xyz="0.0 0 -0.016"/>
+      <geometry>
+         <box size="0.4 0.4 0.016"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.0 0 -0.016"  />
+      <geometry>
+         <box size="0.4 0.04 0.016"/>
+      </geometry>
+    </collision>
+    </link>   
+    
+    
+    <joint name="right_wheel_joint" type="continuous">
+        <origin xyz="-0.0 -0.21 -0.02" rpy="1.5708 0 0" />
+        <parent link="base_plate" />
+        <child link="right_wheel" />
+        <axis xyz="0 0 -1" />
+    </joint>
+
+    <link name="right_wheel">
+    <visual>
+      <origin rpy="0 -0.0 0." xyz="0.0 0.0 0.025"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.08"/> 
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.025"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.08"/>
+      </geometry>
+    </collision>
+    </link>   
+    
+    <joint name="left_wheel_joint" type="continuous">
+        <origin xyz="0.0 0.21 -0.02" rpy="1.5708 0 0" />
+        <parent link="base_plate" />
+        <child link="left_wheel" />
+        <axis xyz="0 0 -1" />
+    </joint>
+
+    <link name="left_wheel">
+    <visual>
+      <origin rpy="0 -0.0 0." xyz="0.0 0.0 -0.025"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.08"/> 
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.0 0.0 -0.025"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.08"/>
+      </geometry>
+    </collision>
+    </link>   
+    
+    
+    <joint name="caster1_joint" type="fixed">
+        <origin xyz="0.155 0.0 -0.016" rpy="0 0 0" />
+        <parent link="base_plate" />
+        <child link="caster1_dummy" />
+    </joint>
+    
+    
+    <link name="caster1_dummy">
+    <visual>
+      <origin rpy="0 0.0 0." xyz="0.0 0.0 -0.027"/>
+      <geometry>
+        <box size="0.09 0.09 0.054"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.0 0.0 -0.027"/>
+      <geometry>
+        <box size="0.09 0.9 0.054"/>
+      </geometry>
+    </collision>
+    </link> 
+    
+    
+    
+    <joint name="caster2_joint" type="fixed">
+        <origin xyz="-0.155 0.0 -0.016" rpy="0 0 0" />
+        <parent link="base_plate" />
+        <child link="caster2_dummy" />
+    </joint>
+    
+    
+    <link name="caster2_dummy">
+    <visual>
+      <origin rpy="0 0.0 0." xyz="0.0 0.0 -0.027"/>
+      <geometry>
+        <box size="0.09 0.09 0.054"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.0 0.0 -0.027"/>
+      <geometry>
+        <box size="0.09 0.9 0.054"/>
+      </geometry>
+    </collision>
+    </link> 
+    
+    
+    
+    <joint name="caster1_wheel_joint" type="fixed">
+        <origin xyz="-0.0 0.0 -0.054" rpy="0 0 0" />
+        <parent link="caster1_dummy" />
+        <child link="caster1_wheel" />
+    </joint>
+    
+    
+    <link name="caster1_wheel">
+        <visual>
+          <origin rpy="0 0.0 0." xyz="0.0 0.0 -0.0"/>
+          <geometry>
+            <sphere radius="0.03"/>
+          </geometry>
+          <material name="black"/>
+        </visual>
+        <collision>
+          <origin rpy="0 0 0" xyz="0.0 0.0 -0.0"/>
+          <geometry>
+            <sphere radius="0.03"/>
+          </geometry>
+        </collision>
+    </link> 
+    
+    
+    <joint name="caster2_wheel_joint" type="fixed">
+        <origin xyz="-0.0 0.0 -0.054" rpy="0 0 0" />
+        <parent link="caster2_dummy" />
+        <child link="caster2_wheel" />
+    </joint>
+    
+    
+    <link name="caster2_wheel">
+        <visual>
+          <origin rpy="0 0.0 0." xyz="0.0 0.0 -0.0"/>
+          <geometry>
+            <sphere radius="0.03"/>
+          </geometry>
+          <material name="black"/>
+        </visual>
+        <collision>
+          <origin rpy="0 0 0" xyz="0.0 0.0 -0.0"/>
+          <geometry>
+            <sphere radius="0.03"/>
+          </geometry>
+        </collision>
+    </link> 
+    
+    
+   <joint name="laser_joint" type="fixed">
+        <origin xyz="0.12 0.0 0.035" rpy="0 0 0" />
+        <parent link="base_plate" />
+        <child link="laser" />
+    </joint>
+
+    <link name="laser">
+    
+    </link>
+	
+	
+	<link name="imu_link">
+    
+    </link>
+
+    <joint name="imu_link_joint" type="fixed">
+        <origin xyz="0.18 -0.18 0.035" rpy="0 0 0" />
+        <parent link="base_plate" />
+        <child link="imu_link" />
+    </joint>
+    
+    
+    <ros2_control name="DiffBotSystem" type="system">
+      <hardware>
+         <plugin>agv_proto_hardware/DiffBotSystemHardware</plugin>
+          <param name="example_param_hw_start_duration_sec">2.0</param>
+          <param name="example_param_hw_stop_duration_sec">3.0</param>
+      </hardware>
+      <joint name="right_wheel_joint">
+        <command_interface name="velocity">
+          <param name="min">-1</param>
+          <param name="max">1</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="left_wheel_joint">
+        <command_interface name="velocity">
+          <param name="min">-1</param>
+          <param name="max">1</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+    </ros2_control>
+    
+    
+</robot>

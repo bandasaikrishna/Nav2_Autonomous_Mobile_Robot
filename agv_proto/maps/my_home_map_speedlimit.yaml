@@ -1,0 +1,7 @@
+image: my_home_map_speedlimit.pgm
+mode: scale
+resolution: 0.05
+origin: [-1.72, -6.96, 0]
+negate: 0
+occupied_thresh: 1.0
+free_thresh: 0.0
